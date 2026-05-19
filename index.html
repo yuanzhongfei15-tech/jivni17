@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极光工具 - 全网实用工具聚合门户</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        deep: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                            600: '#475569',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        },
+                        sky: {
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(56, 189, 248, 0.15)',
+                        'glass': '0 8px 32px rgba(0, 0, 0, 0.1)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #475569 transparent;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 3px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .dark .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
+        }
+        .dark .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(56, 189, 248, 0.2);
+        }
+        .fade-in {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="font-sans bg-deep-50 dark:bg-deep-900 text-deep-800 dark:text-deep-100 transition-colors duration-300">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-card border-b border-deep-200/50 dark:border-deep-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center">
+                        <span class="text-xl">⚡</span>
+                    </div>
+                    <span class="font-bold text-xl gradient-text">极光工具</span>
+                </div>
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#home" class="text-deep-600 dark:text-deep-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium">首页</a>
+                    <a href="#hot" class="text-deep-600 dark:text-deep-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium">热门</a>
+                    <a href="#categories" class="text-deep-600 dark:text-deep-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium">分类</a>
+                    <a href="#favorites" class="text-deep-600 dark:text-deep-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium">收藏</a>
+                    <a href="#history" class="text-deep-600 dark:text-deep-300 hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-medium">历史</a>
+                </div>
+                <div class="flex items-center gap-3">
+                    <button id="themeToggle" class="p-2 rounded-lg glass-card hover:shadow-glow transition-all">
+                        <span id="sunIcon" class="text-xl">☀️</span>
+                        <span id="moonIcon" class="text-xl hidden">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+                    <span class="text-green-500">✓</span>
+                    <span class="text-sm text-deep-600 dark:text-deep-300">上百款工具 · 免费使用 · 无广告</span>
+                </div>
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">
+                    <span class="gradient-text">全网实用工具</span><br>
+                    <span class="text-deep-800 dark:text-deep-100">一键聚合</span>
+                </h1>
+                <p class="text-xl text-deep-600 dark:text-deep-400 mb-10 max-w-2xl mx-auto">
+                    办公、学习、设计、开发一站式解决方案<br>
+                    极简高效，极速加载
+                </p>
+                
+                <!-- Search Box -->
+                <div class="max-w-2xl mx-auto mb-12">
+                    <div class="glass-card rounded-2xl p-2 flex items-center gap-3 shadow-glass">
+                        <span class="text-2xl pl-3">🔍</span>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="搜索工具，如：图片压缩、二维码生成..." 
+                            class="flex-1 bg-transparent border-none outline-none py-3 text-lg"
+                        >
+                        <button id="searchBtn" class="bg-gradient-to-r from-sky-500 to-sky-600 text-white px-8 py-3 rounded-xl hover:opacity-90 transition-all font-medium shadow-glow">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quick Categories -->
+                <div class="flex flex-wrap justify-center gap-3">
+                    <button class="quick-btn glass-card px-5 py-2 rounded-xl hover:shadow-glow transition-all font-medium text-deep-700 dark:text-deep-300" data-category="image">
+                        🖼️ 图片工具
+                    </button>
+                    <button class="quick-btn glass-card px-5 py-2 rounded-xl hover:shadow-glow transition-all font-medium text-deep-700 dark:text-deep-300" data-category="office">
+                        📄 办公工具
+                    </button>
+                    <button class="quick-btn glass-card px-5 py-2 rounded-xl hover:shadow-glow transition-all font-medium text-deep-700 dark:text-deep-300" data-category="code">
+                        💻 开发工具
+                    </button>
+                    <button class="quick-btn glass-card px-5 py-2 rounded-xl hover:shadow-glow transition-all font-medium text-deep-700 dark:text-deep-300" data-category="life">
+                        🎯 生活实用
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot Tools Section -->
+    <section id="hot" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">🔥 热门常用</h2>
+                    <p class="text-deep-600 dark:text-deep-400">用户最常用的工具集合</p>
+                </div>
+            </div>
+            <div id="hotGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section id="categories" class="py-20 bg-deep-100/50 dark:bg-deep-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">📁 全部分类</h2>
+                    <p class="text-deep-600 dark:text-deep-400">找到你需要的工具类型</p>
+                </div>
+            </div>
+            <div id="categoryGrid" class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10"></div>
+            
+            <!-- Filtered Results -->
+            <div id="filterResults" class="hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 id="currentCategory" class="text-2xl font-bold"></h3>
+                    <button id="clearFilter" class="text-sky-600 hover:text-sky-700 transition-colors font-medium flex items-center gap-2">
+                        ← 返回分类
+                    </button>
+                </div>
+                <div id="categoryItems" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Office Tools Section -->
+    <section id="office" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">💼 办公效率</h2>
+                    <p class="text-deep-600 dark:text-deep-400">提升工作效率的必备工具</p>
+                </div>
+            </div>
+            <div id="officeGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+    </section>
+
+    <!-- Life Tools Section -->
+    <section id="life" class="py-20 bg-deep-100/50 dark:bg-deep-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">🎯 生活实用</h2>
+                    <p class="text-deep-600 dark:text-deep-400">日常生活中常用的便捷工具</p>
+                </div>
+            </div>
+            <div id="lifeGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+    </section>
+
+    <!-- Developer Tools Section -->
+    <section id="developer" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">💻 程序员开发</h2>
+                    <p class="text-deep-600 dark:text-deep-400">开发者必备的效率工具</p>
+                </div>
+            </div>
+            <div id="devGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+    </section>
+
+    <!-- Image Tools Section -->
+    <section id="image" class="py-20 bg-deep-100/50 dark:bg-deep-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">🖼️ 图片处理</h2>
+                    <p class="text-deep-600 dark:text-deep-400">图片编辑、压缩、格式转换</p>
+                </div>
+            </div>
+            <div id="imageGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+        </div>
+    </section>
+
+    <!-- Favorites Section -->
+    <section id="favorites" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">⭐ 我的收藏</h2>
+                    <p class="text-deep-600 dark:text-deep-400">收藏常用工具，快速访问</p>
+                </div>
+            </div>
+            <div id="favoritesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+            <div id="noFavorites" class="hidden text-center py-12">
+                <span class="text-5xl mb-4 block">📌</span>
+                <p class="text-deep-600 dark:text-deep-400">还没有收藏的工具，点击工具卡片上的 ⭐ 即可收藏</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section id="history" class="py-20 bg-deep-100/50 dark:bg-deep-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">📋 使用历史</h2>
+                    <p class="text-deep-600 dark:text-deep-400">最近使用过的工具</p>
+                </div>
+                <button id="clearHistory" class="text-deep-600 hover:text-red-600 transition-colors font-medium">
+                    清空历史
+                </button>
+            </div>
+            <div id="historyGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+            <div id="noHistory" class="hidden text-center py-12">
+                <span class="text-5xl mb-4 block">📝</span>
+                <p class="text-deep-600 dark:text-deep-400">使用记录为空，开始使用工具吧！</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-deep-200/50 dark:bg-deep-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center gap-3 mb-4">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-400 to-sky-600 flex items-center justify-center">
+                        <span class="text-xl">⚡</span>
+                    </div>
+                    <span class="font-bold text-xl gradient-text">极光工具</span>
+                </div>
+                <p class="text-deep-600 dark:text-deep-400 mb-4">极简高效，助力你的工作与生活</p>
+                <p class="text-deep-500 dark:text-deep-500 text-sm">© 2024 极光工具 · 免费无广告 · 持续更新</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 glass-card px-6 py-3 rounded-xl shadow-glass hidden z-50">
+        <span id="toastMessage" class="font-medium"></span>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
